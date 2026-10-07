@@ -37,6 +37,7 @@ export class App {
            next: (value) => {
             console.log(value);
             this.contacts$ = this.getContacts();
+            alert('Member Added');
             this.contactsForm.reset();
            }
         })
@@ -46,7 +47,7 @@ export class App {
       this.http.delete(`https://localhost:7183/api/Contacts/${id}`)
         .subscribe({
           next: (value) => {
-            alert('Record Deleted');
+            alert('Member Deleted');
             this.contacts$ = this.getContacts();
           }
         })
