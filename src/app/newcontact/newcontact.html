@@ -1,0 +1,25 @@
+<div class ="header">Add new Member</div>
+    <div >
+      <form (ngSubmit) = "onFormSubmit()" [formGroup] = "contactsForm">
+          <div class="form-row">
+            <label for="name" >Name</label>
+            <input id="name" type="text" formControlName="name">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" type="text"  formControlName="email">
+          </div>
+          <div class="form-row">
+            <label for="phone" >Phone</label>
+            <input id="phone" type="text"  formControlName="phone">
+          </div>
+          <div class="form-row">
+            <label for="favorite" >favorite</label>
+            <input id="favorite" type="checkbox" formControlName="favorite">
+          </div>
+          <div >            
+            <button  type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: 1px solid #007bff; border-radius: 5px;">Add Member</button> 
+
+          </div>
+      </form>
+      </div>
