@@ -1,0 +1,20 @@
+@if (isOpen) {
+  <div class="modal-backdrop" (click)="close()">
+    <div class="modal-container" role="dialog" aria-modal="true" [attr.aria-label]="title" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ title }}</h2>
+        <button type="button" class="close-btn" aria-label="Close modal" (click)="close()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Cancel</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="close()">OK</button> -->
+      </div>
+    </div>
+  </div>
+  
+}

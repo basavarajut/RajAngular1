@@ -28,7 +28,7 @@ export class Newcontact {
           phone: this.contactsForm.value.phone,
           favorite: this.contactsForm.value.favorite
         }
-        this.http.post('https://localhost:7183/api/Contacts', addContactRequest)
+        this.http.post('https://localhost:7289/api/Contacts/SaveContact', addContactRequest)
           .subscribe({
              next: (value) => {
               console.log(value);
