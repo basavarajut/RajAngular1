@@ -1,4 +1,4 @@
-<div class ="header">Add new Member</div>
+<h2>{{ isEditMode ? 'Edit Contact' : 'Add Contact' }}</h2>
     <div >
       <form (ngSubmit) = "onFormSubmit()" [formGroup] = "contactsForm">
           <div class="form-row">
@@ -18,7 +18,12 @@
             <input id="favorite" type="checkbox" formControlName="favorite">
           </div>
           <div >            
-            <button  type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: 1px solid #007bff; border-radius: 5px;">Add Member</button> 
+            <button  type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: 1px solid #007bff; border-radius: 5px;">
+              {{ isEditMode ? 'Update Contact' : 'Add Contact' }}
+            </button> 
+            <button type="button" (click)="cancelled.emit()">
+                Cancel
+            </button>
 
           </div>
       </form>

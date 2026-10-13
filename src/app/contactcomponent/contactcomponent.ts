@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Contact } from '../../models/contact';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Modalpopup } from '../shared/modalpopup/modalpopup';
@@ -16,7 +16,9 @@ import { Newcontact } from '../newcontact/newcontact';
 export class Contactcomponent {
 
   http = inject(HttpClient);
-  contacts$ = this.getContacts();
+  contactList$ = this.getContacts();
+
+  selectedContact: Contact | null = null;
 
   
   
@@ -29,15 +31,45 @@ export class Contactcomponent {
         .subscribe({
           next: (value) => {
             alert('Member Deleted');
-            this.contacts$ = this.getContacts();
+            this.contactList$ = this.getContacts();
           }
         })
    }
 
+   //Edit Contact *****************
+   onContactSaved(updatedContact: Contact): void {
+    if (!this.selectedContact) {
+      return;
+    }
+
+    this.http.put<Contact>(`https://localhost:7289/api/Contacts/UpdateContact/${updatedContact.id}`,updatedContact
+    ).subscribe({
+      next: (response) => {
+        alert('Contact updated successfully');
+
+        // Refresh the contact list
+        this.contactList$ = this.getContacts();
+
+        // Close the modal
+        this.selectedContact = null;
+      },
+      error: (error) => {
+        console.error('Error updating contact:', error);
+        alert('Failed to update contact');
+      }
+    });
+    
+  }
+
+  
+
+  //Edit Contact *****************
+
    //Start Modal Popup **************
 
    isModalOpen = false;
-    openModal(entity:Contact) {
+    openModal(contact:any): void {
+    this.selectedContact = { ...contact };
     this.isModalOpen = true;
 
   }
